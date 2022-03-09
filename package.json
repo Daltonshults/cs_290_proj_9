@@ -1,0 +1,22 @@
+{
+  "name": "motorcycle_mania",
+  "version": "0.0.1",
+  "description": "Motorcycle Mania",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ybakos/cs290-motorcycle-mania.git"
+  },
+  "author": "Yong Bakos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ybakos/cs290-motorcycle-mania/issues"
+  },
+  "homepage": "https://github.com/ybakos/cs290-motorcycle-mania",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
