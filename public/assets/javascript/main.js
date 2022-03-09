@@ -31,10 +31,29 @@ function displayCategories(event) {
       return response.json()
     }
   }).then((categories) => {
-    console.log(categories)
+    let categoriesHeader = document.createElement('h2')
+    categoriesHeader.appendChild(document.createTextNode('Categories'))
+    let categoriesList = document.createElement('ul')
+    categoriesList.setAttribute('id', 'categories')
+    categories.forEach(category => {
+      let listItem = document.createElement('li')
+      let listItemHeader = document.createElement('h3')
+      let listItemLink = document.createElement('a')
+      listItemLink.setAttribute('href', '/category_' + category.id + '.html')
+      listItemLink.appendChild(document.createTextNode(category.name))
+      listItemHeader.appendChild(listItemLink)
+      listItem.appendChild(listItemHeader)
+      categoriesList.appendChild(listItem)
+    })
+
+
+    let main = document.querySelector('main')
+    while (main.hasChildNodes()) {
+      main.removeChild(main.lastChild);
+    }
+    main.appendChild(categoriesHeader)
+    main.appendChild(categoriesList)
   })
-
-
 
 }
 
