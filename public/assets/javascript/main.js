@@ -1,18 +1,4 @@
 
-const categories = [
-  { id: 3, name: 'Cruiser' },
-  { id: 2, name: 'Dual-Sport' },
-  { id: 1, name: 'Naked' },
-  { id: 4, name: 'Sport' }
-]
-
-const manufacturers = [
-  { id: 5, name: 'BMW' },
-  { id: 2, name: 'Honda' },
-  { id: 1, name: 'Indian' },
-  { id: 3, name: 'Triumph' },
-  { id: 4, name: 'Victory' }
-]
 
 document.addEventListener('DOMContentLoaded', bindNavBarClickHandlers)
 document.addEventListener('DOMContentLoaded', mainContent)
@@ -59,26 +45,54 @@ function displayCategories(event) {
 
 function displayManufacturers(event) {
   event.preventDefault()
-  let manufacturersHeader = document.createElement('h2')
-  manufacturersHeader.appendChild(document.createTextNode('Manufacturers'))
-  let manufacturersList = document.createElement('ul')
-  manufacturersList.setAttribute('id', 'manufacturers')
-  manufacturers.forEach(manufacturer => {
-    let listItem = document.createElement('li')
-    let listItemHeader = document.createElement('h3')
-    let listItemLink = document.createElement('a')
-    listItemLink.setAttribute('href', '/manufacturer_' + manufacturer.id + '.html')
-    listItemLink.appendChild(document.createTextNode(manufacturer.name))
-    listItemHeader.appendChild(listItemLink)
-    listItem.appendChild(listItemHeader)
-    manufacturersList.appendChild(listItem)
+  fetch('/manufacturers').then((response) => {
+    if (response.ok) {
+      return response.json()
+    }
+  }).then((manufacturers) => {
+    let manufacturersHeader = document.createElement('h2')
+    manufacturersHeader.appendChild(document.createTextNode('Manufacturers'))
+    let manufacturersList = document.createElement('ul')
+    manufacturersList.setAttribute('id', 'manufacturers')
+    manufacturers.forEach(manufacturer => {
+      let listItem = document.createElement('li')
+      let listItemHeader = document.createElement('h3')
+      let listItemLink = document.createElement('a')
+      listItemLink.setAttribute('href', '/manufacturer_' + manufacturer.id + '.html')
+      listItemLink.appendChild(document.createTextNode(manufacturer.name))
+      listItemHeader.appendChild(listItemLink)
+      listItem.appendChild(listItemHeader)
+      manufacturersList.appendChild(listItem)
+    })
+    let main = document.querySelector('main')
+    while (main.hasChildNodes()) {
+      main.removeChild(main.lastChild);
+    }
+    main.appendChild(manufacturersHeader)
+    main.appendChild(manufacturersList)
+
   })
-  let main = document.querySelector('main')
-  while (main.hasChildNodes()) {
-    main.removeChild(main.lastChild);
-  }
-  main.appendChild(manufacturersHeader)
-  main.appendChild(manufacturersList)
+
+  // let manufacturersHeader = document.createElement('h2')
+  // manufacturersHeader.appendChild(document.createTextNode('Manufacturers'))
+  // let manufacturersList = document.createElement('ul')
+  // manufacturersList.setAttribute('id', 'manufacturers')
+  // manufacturers.forEach(manufacturer => {
+  //   let listItem = document.createElement('li')
+  //   let listItemHeader = document.createElement('h3')
+  //   let listItemLink = document.createElement('a')
+  //   listItemLink.setAttribute('href', '/manufacturer_' + manufacturer.id + '.html')
+  //   listItemLink.appendChild(document.createTextNode(manufacturer.name))
+  //   listItemHeader.appendChild(listItemLink)
+  //   listItem.appendChild(listItemHeader)
+  //   manufacturersList.appendChild(listItem)
+  // })
+  // let main = document.querySelector('main')
+  // while (main.hasChildNodes()) {
+  //   main.removeChild(main.lastChild);
+  // }
+  // main.appendChild(manufacturersHeader)
+  // main.appendChild(manufacturersList)
 }
 
 function mainContent() {
