@@ -10,6 +10,6 @@ app.get('/categories', (req, res) => res.send(categories))
 
 app.get('/manufacturers', (req, res) => res.send(manufacturers))
 
-app.get('/motorcycles', (req, res) => res.send(motorcycles))
+app.get('/motorcycles/featured', (req, res) => res.send(motorcycles[Math.floor(Math.random()* motorcycles.length)]))
 
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`))
